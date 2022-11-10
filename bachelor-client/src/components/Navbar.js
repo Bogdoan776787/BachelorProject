@@ -3,10 +3,10 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 const navigation = [
-  { name: "Sign In", to: "/signin", current: false },
-  { name: "Chat", to: "/chat", current: false },
-  { name: "Projects", to: "#", current: false },
-  { name: "Calendar", to: "#", current: false },
+  { id: 1, name: "Sign In", to: "/signin", current: false },
+  { id: 2, name: "Chat", to: "/chat", current: false },
+  { id: 3, name: "Projects", to: "#", current: false },
+  { id: 4, name: "Calendar", to: "#", current: false },
 ];
 
 function classNames(...classes) {
@@ -53,7 +53,7 @@ export default function Navbar() {
                   <div className="flex space-x-4">
                     {navigation.map((item) => (
                       <Link
-                        key={item.name}
+                        key={item.id}
                         to={item.to}
                         className={classNames(
                           item.current
@@ -98,7 +98,7 @@ export default function Navbar() {
               {navigation.map((item) => (
                 <Link to={item.to}>
                   <Disclosure.Button
-                    key={item.name}
+                    key={item.id}
                     as="a"
                     className={classNames(
                       item.current
