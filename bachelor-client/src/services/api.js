@@ -40,9 +40,9 @@ const api = createApi({
 });
 
 export const {
-  useSignupUserMutation,
-  useLoginUserMutation,
-  useLogoutUserMutation,
+  useSignUpUserMutation,
+  useSignInUserMutation,
+  useSignOutUserMutation,
 } = api;
 
 export default api;

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { LockClosedIcon } from "@heroicons/react/20/solid";
+import { useSignUpUserMutation } from "../services/api";
 
 const SignUp = () => {
   const [userName, setUserName] = useState("");
@@ -9,7 +9,7 @@ const SignUp = () => {
   const [userImage, setUserImage] = useState(null);
   const [loadImage, setLoadImage] = useState(false);
   const [imageView, setImageView] = useState(null);
-
+  const [signUp, { isLoading, error }] = useSignUpUserMutation();
   const imageValidation = (e) => {
     const image = e.target.files[0];
     console.log(image);
@@ -23,7 +23,7 @@ const SignUp = () => {
   const loadingImage = async () => {
     const data = new FormData();
     data.append("image", userImage);
-    data.append("upload_preset", "i5gzjiks");
+    data.append("upload_preset", "bachelor_preset");
     try {
       setLoadImage(true);
       let res = await fetch(
@@ -45,7 +45,13 @@ const SignUp = () => {
     e.preventDefault();
     if (!userImage) return alert("You have forgot to load the image");
     const url = await loadingImage(userImage);
-    console.log(url);
+    signUp({ userName, userEmail, userPassword, userImage: url }).then(
+      ({ data }) => {
+        if (data) {
+          console.log(data);
+        }
+      }
+    );
   };
   return (
     <>
